@@ -17,7 +17,7 @@
 
 The **Student Performance Prediction System** is a machine learning-based system designed to predict student academic performance and identify students who may be at academic risk.
 
-The system uses student academic data to classify students into different risk levels and provides AI-generated intervention recommendations to support timely academic assistance.
+The system uses student academic data to classify students into **Low, Medium, or High academic risk** levels and provides AI-generated intervention recommendations to support timely academic assistance.
 
 ---
 
@@ -27,7 +27,7 @@ The system uses student academic data to classify students into different risk l
 * Identify students who may be at **Low, Medium, or High academic risk**.
 * Identify important academic risk factors.
 * Generate personalized intervention recommendations using AI.
-* Provide an application/dashboard for viewing student risk information.
+* Provide an application for viewing student risk information.
 * Support academic advisors in making timely intervention decisions.
 
 ---
@@ -40,21 +40,23 @@ The system uses student academic data to classify students into different risk l
 * Risk factor identification.
 * AI-generated intervention recommendations.
 * Academic risk dashboard/application.
-* Model evaluation using standard machine learning metrics.
-* Testing and validation of core system features.
+* Machine learning model evaluation.
+* System testing and validation.
+* User testing and evaluation.
 
 ---
 
 ## Technologies Used
 
 * **Python**
-* **Scikit-learn**
 * **Pandas**
-* **Google Colab / Jupyter Notebook**
+* **Scikit-learn**
 * **Streamlit**
 * **Google Gemini API**
+* **Google Colab / Jupyter Notebook**
 * **JSON**
 * **GitHub**
+* **Git LFS** for the trained machine learning model
 
 ---
 
@@ -66,7 +68,9 @@ The system uses a **Random Forest Classifier** to classify students into three a
 * **Medium Risk**
 * **High Risk**
 
-The model uses relevant student academic features such as:
+### Model Features
+
+The model uses relevant student academic features, including:
 
 * Average assessment score
 * Assessment count
@@ -77,10 +81,14 @@ The dataset is divided into training and testing sets using an **80/20 stratifie
 
 ### Model Configuration
 
-* Algorithm: Random Forest Classifier
-* Number of trees: 200
-* Random state: 42
-* Class weighting: Balanced
+| Parameter        | Value                    |
+| ---------------- | ------------------------ |
+| Algorithm        | Random Forest Classifier |
+| Number of Trees  | 200                      |
+| Random State     | 42                       |
+| Class Weight     | Balanced                 |
+| Train/Test Split | 80/20                    |
+| Target Classes   | Low, Medium, High        |
 
 ### Model Evaluation
 
@@ -93,11 +101,13 @@ The model is evaluated using:
 * Classification report
 * Confusion matrix
 
+The confusion matrix and other evaluation outputs are stored in the `results/` directory.
+
 ---
 
 ## AI Workflow
 
-The system integrates an AI workflow to generate academic intervention recommendations.
+The system integrates an AI workflow to generate academic intervention recommendations based on the predicted student risk level and identified risk factors.
 
 ### Workflow
 
@@ -115,7 +125,13 @@ Google Gemini
 Intervention Recommendation
 ```
 
-The AI recommendation component is designed to provide professional, supportive, non-judgmental, and action-oriented recommendations based on the student's identified risk factors.
+The AI recommendation component is designed to provide recommendations that are:
+
+* Professional
+* Supportive
+* Non-judgmental
+* Action-oriented
+* Based on identified student risk factors
 
 ---
 
@@ -123,13 +139,20 @@ The AI recommendation component is designed to provide professional, supportive,
 
 The system uses a **Student Academic Intervention Knowledge Base** containing risk levels, risk factors, intervention rules, and advisor guidance.
 
-The main risk levels are:
+### Risk Levels
 
 * **Low Risk** – Routine monitoring
 * **Medium Risk** – Early intervention
 * **High Risk** – Immediate intervention
 
-Potential risk factors include academic performance, attendance, missed assignments, and participation.
+Potential risk factors include:
+
+* Academic performance
+* Attendance
+* Missed assignments
+* Student participation
+
+The knowledge base is used together with the AI workflow to generate appropriate intervention recommendations.
 
 ---
 
@@ -139,15 +162,19 @@ The project uses the **Open University Learning Analytics Dataset (OULAD)**.
 
 The dataset contains information related to students, courses, assessments, registration, and student assessment performance.
 
-Relevant dataset files include:
+### Dataset Files
 
+The following OULAD files are included in the `data/` directory:
+
+* `OULAD.names`
 * `studentInfo.csv`
 * `studentRegistration.csv`
 * `courses.csv`
 * `assessments.csv`
 * `studentAssessment.csv`
+* `vle.csv`
 
-> Dataset files are stored in the `data/` directory.
+> **Note:** The dataset is used for academic and project purposes as part of the student performance prediction system.
 
 ---
 
@@ -157,62 +184,99 @@ Relevant dataset files include:
 student-performance-prediction-system/
 │
 ├── app/
-│   ├── frontend/
-│   └── backend/
+│   ├── .gitkeep
+│   ├── ai_workflow_integration.py
+│   ├── api_integration.py
+│   ├── app.py
+│   ├── knowledge_base_preparation.py
+│   ├── llm_service.py
+│   ├── ml_model_training_and_performance_evaluation.py
+│   ├── model.py
+│   ├── prompt_engineering.py
+│   └── prototype.py
 │
 ├── data/
-│   └── Dataset files
+│   ├── .gitkeep
+│   ├── OULAD.names
+│   ├── assessments.csv
+│   ├── courses.csv
+│   ├── studentAssessment.csv
+│   ├── studentInfo.csv
+│   ├── studentRegistration.csv
+│   └── vle.csv
 │
 ├── docs/
-│   ├── report/
-│   ├── slides/
-│   └── poster/
+│   ├── AI Poster.pdf
+│   ├── AI Project.pptx
+│   └── Report.pdf
 │
-├── model/
-│   ├── Trained model
-│   └── Model training files
+├── models/
+│   ├── .gitkeep
+│   └── risk_model.pkl
 │
-├── notebook/
-│   └── Jupyter/Colab notebooks
+├── notebooks/
+│   └── .gitkeep
 │
-├── result/
-│   ├── Evaluation results
-│   ├── Tables
-│   └── Figures
+├── results/
+│   ├── .gitkeep
+│   ├── User Testing.docx
+│   └── confusion matrix
 │
 ├── src/
-│   └── Source and utility code
+│   └── .gitkeep
 │
-├── test/
-│   └── Testing files
+├── tests/
+│   └── .gitkeep
 │
-├── LICENSE
-├── README.md
-└── requirements.txt
+├── .gitignore
+└── README.md
 ```
 
 ### Folder Descriptions
 
-| Folder      | Description                                                 |
-| ----------- | ----------------------------------------------------------- |
-| `app/`      | Main application, including frontend and backend components |
-| `data/`     | Dataset and data-related files                              |
-| `docs/`     | Project report, presentation slides, and poster             |
-| `model/`    | Trained machine learning model and model training files     |
-| `notebook/` | Jupyter/Google Colab notebooks and experiments              |
-| `result/`   | Model evaluation results, tables, and figures               |
-| `src/`      | Supporting source code, preprocessing, and utility code     |
-| `test/`     | System and model testing files                              |
+| Folder       | Description                                                                  |
+| ------------ | ---------------------------------------------------------------------------- |
+| `app/`       | Main application, machine learning, AI workflow, and supporting Python files |
+| `data/`      | OULAD dataset files used by the system                                       |
+| `docs/`      | Final project report, presentation slides, and poster                        |
+| `models/`    | Trained machine learning model                                               |
+| `notebooks/` | Jupyter/Google Colab notebooks and experiments                               |
+| `results/`   | Model evaluation results and user testing documentation                      |
+| `src/`       | Reserved for additional reusable source and utility modules                  |
+| `tests/`     | System and model testing files                                               |
+
+---
+
+## Results and Testing
+
+The project includes model evaluation and system testing results.
+
+The `results/` directory contains:
+
+* **Confusion Matrix** – visualization of the model classification results.
+* **User Testing.docx** – documentation of user testing and system feedback.
+
+These results support the evaluation of the machine learning model and the overall system functionality.
+
+---
+
+## Project Documentation
+
+The `docs/` directory contains the final project documentation:
+
+* **Report.pdf** – Final project report
+* **AI Project.pptx** – Project presentation slides
+* **AI Poster.pdf** – Project poster/infographic
 
 ---
 
 ## Project Timeline
 
 * **Week 1:** Planning and Data Collection
-* **Week 2:** Model and AI Integration
-* **Week 3:** Application Development
-* **Week 4:** Evaluation and Finalization
-* **Week 5:** Presentation
+* **Week 2:** Initial Prototype and AI/ML Development
+* **Week 3:** Application Development, AI Workflow Integration, and Core Feature Testing
+* **Week 4:** Evaluation, Documentation, and Finalization
+* **Week 5:** Final Presentation
 
 ---
 
@@ -227,6 +291,7 @@ The final project includes:
 * **Machine Learning Model**
 * **AI Workflow and Intervention Recommendation System**
 * **Testing and Evaluation Results**
+* **User Testing Documentation**
 
 ---
 
@@ -234,43 +299,59 @@ The final project includes:
 
 **Current Stage: Evaluation and Finalization**
 
-The system prototype and core machine learning/AI components have been developed. The project is currently focused on integrating the final application components, testing the system, evaluating performance, completing documentation, and preparing the final presentation materials.
+The Student Performance Prediction System has been developed with machine learning prediction, academic risk classification, AI-based intervention recommendations, and an application interface.
+
+The project has also been tested and evaluated. Final documentation, presentation materials, poster, user testing results, and model evaluation results have been prepared.
+
+The repository contains the project source code, dataset, documentation, evaluation results, and trained machine learning model.
 
 ---
 
 ## Installation
 
-Clone the repository:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Luvenya/student-performance-prediction-system.git
 ```
 
-Navigate to the project directory:
+### 2. Navigate to the Project Directory
 
 ```bash
 cd student-performance-prediction-system
 ```
 
-Install the required Python packages:
+### 3. Install the Required Packages
 
 ```bash
 pip install -r requirements.txt
 ```
 
+> If using a virtual environment, activate the environment before installing the required packages.
+
 ---
 
 ## Running the Application
 
-The application can be run using the project's application entry point.
-
-Example:
+From the project root directory, run:
 
 ```bash
-streamlit run app.py
+streamlit run app/app.py
 ```
 
-> The exact command may be updated according to the final application structure.
+The Streamlit application will start locally and provide access to the student performance prediction system.
+
+---
+
+## Machine Learning Model
+
+The trained model is stored in:
+
+```text
+models/risk_model.pkl
+```
+
+Because the trained model file is larger than GitHub's normal file-size limit, **Git LFS** is used to manage the model file.
 
 ---
 
@@ -278,4 +359,6 @@ streamlit run app.py
 
 **Group 9 – Project No. 6**
 
-Student Performance Prediction System (ML)
+**Student Performance Prediction System (ML)**
+
+---
